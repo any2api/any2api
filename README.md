@@ -137,7 +137,7 @@ Either way, gRPC endpoints are one kind of API that can be used by other applica
 However, in the sense of API diversity, other kinds of APIs such as REST and messaging are more appropriate for certain usage scenarios.
 Therefore, API adapters (REST, RabbitMQ, JSON-RPC, etc.) are connected with gRPC apps to serve diverse APIs.
 
-An API adapter does not always translate to different kinds of APIs such as gRPC ↔ REST, gRPC ↔ RabbitMQ, etc.
+An API adapter does not always translate to different kinds of APIs such as gRPC-REST, gRPC-RabbitMQ, etc.
 There are also intermediate adapters that take a gRPC endpoint and expose another gRPC endpoint.
 gRPC-to-gRPC adapters can implement diverse middleware functionality such as reshaping gRPC endpoints (e.g. consolidating and filtering operations), authentication, request rate limiting, monitoring, analytics, content transformation, etc.
 
@@ -172,5 +172,5 @@ The interface of an adapter container:
 ### Adapter plugin
 
 Adapters should be kept as small and focused as possible.
-In case of more complex adapters, it is highly recommended to keep them modular and extensible by plugins.
-However, the interface between adapters and plugins depends on the adapter implementation.
+In case of more complex adapters, it is highly recommended to keep them modular and extensible using plugins.
+The specific interface between adapters and plugins depends on the adapter implementation.
