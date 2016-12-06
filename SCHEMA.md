@@ -37,7 +37,7 @@ Its schema is shown in the following:
 
 ``` plaintext
 {
-  "title": (string),
+  "title":       (string),
   "description": (string),
 
   "messages": {
@@ -61,8 +61,8 @@ Its schema is shown in the following:
       "metadata": {
         (metadataName): {
           "description": (string),
-          "default": (string),     # default value
-          "example": (string)      # example value
+          "default":     (string), # default value
+          "example":     (string)  # example value
         }
       }
     }
@@ -74,14 +74,14 @@ Its schema is shown in the following:
       "metadata": {
         (metadataName): {
           "description": (string),
-          "default": (string),     # default value
-          "example": (string)      # example value
+          "default":     (string), # default value
+          "example":     (string)  # example value
         }
       },
       "mapping": {
-        "resource_name": (string),
-        "resource_parent": (string),
-        "resource_path": (string),
+        "resource_name":      (string),
+        "resource_parent":    (string),
+        "resource_path":      (string),
         "resource_operation": (string)
       }
     }
@@ -89,7 +89,7 @@ Its schema is shown in the following:
 }
 ```
 
-The keys `(messageName)`, `(serviceName)` and `(methodName)` are fully qualified names regarding the Protocol Buffers definition using dot notation, for example, `helloMessage` or `myPackage.helloMessage.nestedMessage`.
+The keys `(messageName)`, `(serviceName)` and `(methodName)` are fully qualified names regarding the definitions in the associated `.proto` files, for example, `helloMessage` or `myPackage.helloMessage.nestedMessage`.
 
 
 
@@ -100,9 +100,9 @@ Its schema is shown in the following:
 
 ``` plaintext
 {
-  "title":   (string), # title of resulting gRPC app
+  "title":       (string), # title of resulting gRPC app
   "description": (string),
-  "wrapper": (string), # name of a specific wrapper to use
+  "wrapper":     (string), # name of a specific wrapper
 
   "operations": {
     (operationName): {
