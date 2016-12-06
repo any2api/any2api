@@ -44,7 +44,7 @@ They are combined and bundled as **API stacks**.
 API bricks can be combined and stacked like Lego bricks to build and bundle API stacks.
 For example, a REST API adapter can be stacked on top of a gRPC app to expose application/business logic provided by the app through an HTTP-based RESTful interface.
 Technically, an API stack is specified by a `any2api-stack.yml` file.
-See [schema definition](SCHEMA.md#any2api-stack-yml-schema).
+See [schema definition](SCHEMA.md#any2api-stackyml-schema).
 
 
 
@@ -62,7 +62,7 @@ The interface of a gRPC app container:
 * The `/api` directory *must* be provided as a shared container volume by the gRPC app container. It is used by API adapters.
   * In case of Docker, the `Dockerfile` of the gRPC app *must* include the statement `VOLUME /api`.
 
-* The `/api` directory *can* optionally contain further files such as `/api/meta.yml` (see [schema](SCHEMA.md#meta-yml-schema)) to specify additional metadata, which may be read and considered by API adapters.
+* The `/api` directory *can* optionally contain further files such as `/api/meta.yml` (see [schema](SCHEMA.md#metayml-schema)) to specify additional metadata, which may be read and considered by API adapters.
   * For example, a REST API adapter may require additional information on how to properly map and group RPC operations to resources and their associated CRUD operations.
 
 * By default, a gRPC app exposes the gRPC endpoint described by the `/api/main.proto` file on TCP port `50051`. If the gRPC app exposes its gRPC API on a different port, the container *must* own the `org.any2api.api-port` label with the corresponding port number as value.
@@ -93,7 +93,7 @@ Finally, the statements `LABEL org.any2api.kind="wrapper"` and `ONBUILD LABEL or
 The build context directory that is added as `/wrap` directory to the resulting gRPC app container includes the code/executables/… to be wrapped and exposed through the gRPC endpoint.
 Highly sophisticated wrappers would automatically analyze the provided code to identify and extract metadata such as runtime dependencies and input parameters.
 Alternatively, such metadata can be declaratively specified by a `wrap.yml` file located in the build context directory.
-See [schema definition](SCHEMA.md#wrap-yml-schema).
+See [schema definition](SCHEMA.md#wrapyml-schema).
 
 The structure and content of `wrap.yml` files vary depending on the specific wrapper.
 For example, a wrapper that wraps an existing REST API and exposes its functionality through a gRPC endpoint may refer to a Swagger definition, so the corresponding `wrap.yml` file with its parameter and result mappings may look different.
@@ -138,7 +138,7 @@ The interface of an adapter container:
 
 * The `/api/main.proto` or `$API_DIR/main.proto` file is the *only* file required by an adapter. Therefore, an adapter *must* work properly based on this file without any additional metadata.
 
-* The `/api` directory (or its substitute `API_DIR`) *can* optionally contain further files such as `/api/meta.yml` (see [schema](SCHEMA.md#meta-yml-schema)) to specify additional metadata to be considered by the adapter.
+* The `/api` directory (or its substitute `API_DIR`) *can* optionally contain further files such as `/api/meta.yml` (see [schema](SCHEMA.md#metayml-schema)) to specify additional metadata to be considered by the adapter.
   * For example, a REST API adapter may require additional information on how to properly map and group RPC operations to resources and their associated CRUD operations.
 
 * An adapter *must* understand all proto3 and core gRPC features.
