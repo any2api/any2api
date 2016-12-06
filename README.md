@@ -118,7 +118,7 @@ As a result, multiple adapters can be stacked, for example: gRPC app ↔ monitor
 To ease the composition of gRPC apps and API adapters, it is highly recommended to run an adapter inside a Docker/OCI container.
 The interface of an adapter container:
 
-* An adapter container *must* own the label `org.any2api.kind="adapter"`. If the adapter itself exposes an API endpoint, the container *must* own the `org.any2api.api-port` label with the corresponding port number as value. Optionally, the label `org.any2api.doc-port` *can* be defined with the HTTP port number of the API documentation endpoint as value.
+* An adapter container *must* own the label `org.any2api.kind="adapter"`. If the adapter itself exposes an API endpoint, the container *must* own the `org.any2api.api-port` label with the corresponding port number as value. Optionally, the label `org.any2api.info-port` *can* be defined with an HTTP port number as value to provide API documentation, status information, etc.
   * In case of Docker, the `Dockerfile` of the API adapter container *must* include the statement `LABEL org.any2api.kind="adapter" …` to specify the required labels.
 
 * An adapter *can* own the `org.any2api.api-protocol` label to specify the protocol of the provided API such as `http`, `amqp`, `mqtt`, `http+grpc+json`, `http+json-rpc`, etc.
@@ -128,7 +128,7 @@ The interface of an adapter container:
   * `org.any2api.cap-async`
   * `org.any2api.cap-rest`
   * `org.any2api.cap-rpc`
-  * `org.any2api.cap-event-driven`
+  * `org.any2api.cap-eventdriven`
   * `org.any2api.cap-messaging`
   * `org.any2api.cap-streaming`
   * `org.any2api.cap-brokered`
