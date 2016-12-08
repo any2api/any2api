@@ -46,6 +46,7 @@ Its schema is shown in the following:
       "fields": {
         (fieldName): {
           "description": (string),
+          "default":     (string),
           "mime_type":   (string),
           "mapping": [
             "header" | "body" | "query_param" | (any)
@@ -89,7 +90,7 @@ Its schema is shown in the following:
 }
 ```
 
-The keys `(messageName)`, `(serviceName)` and `(methodName)` are fully qualified names regarding the definitions in the associated `.proto` files, for example, `helloMessage` or `myPackage.helloMessage.nestedMessage`.
+The keys `(messageName)`, `(serviceName)` and `(methodName)` are fully qualified names regarding the definitions in the associated `.proto` files, for example, `myService.myMethod` or `myPackage.helloMessage.nestedMessage`.
 
 
 
