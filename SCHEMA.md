@@ -48,8 +48,9 @@ Its schema is shown in the following:
           "description": (string),
           "default":     (string),
           "mime_type":   (string),
-          "mapping": [
-            "header" | "body" | "query_param" | (any)
+          "carry_in": [
+            "header" | "body" | "body-exclusive" |
+            "query-string" | (any)
           ]
         }
       }
@@ -79,11 +80,12 @@ Its schema is shown in the following:
           "example":     (string)  # example value
         }
       },
-      "mapping": {
+      "rest": {
         "resource_name":      (string),
         "resource_parent":    (string),
         "resource_path":      (string),
-        "resource_operation": (string)
+        "resource_operation": (string),
+        "resource_id_field":  (fieldName)
       }
     }
   }
@@ -107,11 +109,12 @@ Its schema is shown in the following:
 
   "operations": {
     (operationName): {
-      "description": (string),
-      "readme_file": (string),     # path to README file
-      "longrunning": (boolean),
+      "description":     (string),
+      "readme_file":     (string), # path to README file
+      "service":         (string), # gRPC service name
+      "longrunning":     (boolean),
 
-      "parameters_schema": {
+      "parameters": {
         (parameterName): {
           "description": (string),
           "type":        (string), # JSON or proto3 type
@@ -119,24 +122,24 @@ Its schema is shown in the following:
           "default":     (any),    # default value
           "map_to":      "env:…" | "stdin" | "file:…" | (any),
           "streamable":  (boolean),
-          "chunk_delim": (string), # complete chunks only
-          "updatable":   (boolean)
+          "updatable":   (boolean) # allow change after start
         }
       },
 
-      "results_schema": {
+      "results": {
         (resultName): {
           "description": (string),
           "type":        (string), # JSON or proto3 type
           "proto":       (string), # custom proto3 type def
           "map_from":    "stdout" | "file:…" | (any),
-          "streamable":  (boolean)
+          "streamable":  (boolean),
+          "chunk_delim": (string)  # complete chunks only
         }
       },
 
       "commands" {
-        "prepare": (string),       # shell command
-        "invoke":  (string)        # shell command
+        "prepare":       (string), # shell command
+        "invoke":        (string)  # shell command
       }
     }
   }

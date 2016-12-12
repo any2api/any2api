@@ -118,20 +118,12 @@ As a result, multiple adapters can be stacked, for example: gRPC app ↔ monitor
 To ease the composition of gRPC apps and API adapters, it is highly recommended to run an adapter inside a Docker/OCI container.
 The interface of an adapter container:
 
-* An adapter container *must* own the label `org.any2api.kind="adapter"`. If the adapter itself exposes an API endpoint, the container *must* own the `org.any2api.api-port` label with the corresponding port number as value. Optionally, the label `org.any2api.info-port` *can* be defined with an HTTP port number as value to provide API documentation, status information, etc.
+* An adapter container *must* own the label `org.any2api.kind="adapter"`; in case of an intermediate adapter, the label *must* be `org.any2api.kind="intermediate-adapter"`. If the adapter itself exposes an API endpoint, the container *must* own the `org.any2api.api-port` label with the corresponding port number as value. Optionally, the label `org.any2api.info-port` *can* be defined with an HTTP port number as value to provide API documentation, status information, etc.
   * In case of Docker, the `Dockerfile` of the API adapter container *must* include the statement `LABEL org.any2api.kind="adapter" …` to specify the required labels.
 
-* An adapter *can* own the `org.any2api.api-protocol` label to specify the protocol of the provided API such as `http`, `amqp`, `mqtt`, `http+grpc+json`, `http+json-rpc`, etc.
-
-* An adapter *can* own additional boolean labels (value `true` or `false`) to describe the properties and capabilities of the exposed API:
-  * `org.any2api.cap-sync`
-  * `org.any2api.cap-async`
-  * `org.any2api.cap-rest`
-  * `org.any2api.cap-rpc`
-  * `org.any2api.cap-eventdriven`
-  * `org.any2api.cap-messaging`
-  * `org.any2api.cap-streaming`
-  * `org.any2api.cap-brokered`
+* An adapter *can* own the `org.any2api.keywords` label to specify properties of the provided API. The label value is a comma-separated list of keywords.
+  * Keywords to specify protocols and data formats: `http`, `amqp`, `mqtt`, `grpc`, `xml`, `json`, `json-rpc`, …
+  * Keywords to specify capabilities: `sync`, `async`, `rest`, `rpc`, `event-driven`, `messaging`, `streaming`, `brokered`, …
 
 * The `/api` directory is a shared container volume. It is typically provided by the underlying gRPC app container (or intermediate adapter container) and used by the API adapter container.
   * The environment variable `API_DIR` *can* optionally be provided to the adapter to use another directory instead of `/api`. An adapter *must* process and respect this variable if it is set.
@@ -150,9 +142,6 @@ The interface of an adapter container:
 Furthermore, the interface of an intermediate adapter container must follow additional rules:
 
 * An intermediate gRPC-to-gRPC adapter *must* also implement the interface of a gRPC app container to enable other adapters to run on top.
-
-* An intermediate adapter container *must* own the label `org.any2api.intermediate="true"`.
-  * In case of Docker, the `Dockerfile` of the API adapter container *must* include the statement `LABEL org.any2api.intermediate="true"`.
 
 * Intermediate gRPC-to-gRPC adapters potentially modify the originally provided gRPC endpoint's interface. Therefore, they may change files inside the `/api` directory (or its substitute `API_DIR`) such as `main.proto` and `meta.yml`. By default, existing files are immediately modified and overridden.
   * If the environment variable `UPDATED_API_DIR` is provided to the adapter container with a different path than `/api` or `API_DIR`, the adapter *must* duplicate the existing directory and apply all modifications to the copied directory. The content of the original directory is not modified. The path defined by `UPDATED_API_DIR` *should* be a subdirectory of `/api` or `API_DIR` to place it inside the shared container volume.
