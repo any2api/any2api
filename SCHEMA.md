@@ -48,9 +48,9 @@ Its schema is shown in the following:
           "description": (string),
           "default":     (string),
           "mime_type":   (string),
-          "carry_in": [
+          "in": [
             "header" | "body" | "body-exclusive" |
-            "query-string" | (any)
+            "query" | (any)
           ]
         }
       }
@@ -81,11 +81,19 @@ Its schema is shown in the following:
         }
       },
       "rest": {
-        "resource_name":      (string),
-        "resource_parent":    (string),
-        "resource_path":      (string),
-        "resource_operation": (string),
-        "resource_id_field":  (fieldName)
+        "resource_operation":  (string), # CRUD
+        "resource_address": {
+          "resource_id_field": (fieldName),
+          "resource_name":     (string),
+          "resource_parent":   (string),
+          "resource_path":     (string)
+        },
+        "created_address": {
+          "resource_id_field": (fieldName),
+          "resource_name":     (string),
+          "resource_parent":   (string),
+          "resource_path":     (string)
+        }
       }
     }
   }
