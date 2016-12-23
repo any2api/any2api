@@ -117,10 +117,11 @@ Its schema is shown in the following:
 
   "operations": {
     (operationName): {
-      "description":     (string),
-      "readme_file":     (string), # path to README file
-      "service":         (string), # gRPC service name
-      "longrunning":     (boolean),
+      "description": (string),
+      "readme_file": (string),  # path to README file
+      "service":     (string),  # gRPC service name
+      "async":       (boolean), # long-running, much data, …
+      "stream":      "in" | "out" | "bi",
 
       "parameters": {
         (parameterName): {
@@ -128,9 +129,13 @@ Its schema is shown in the following:
           "type":        (string), # JSON or proto3 type
           "proto":       (string), # custom proto3 type def
           "default":     (any),    # default value
-          "map_to":      "env:…" | "stdin" | "file:…" | (any),
-          "streamable":  (boolean),
-          "updatable":   (boolean) # allow change after start
+          "map_to": {
+            "format":    "json" | "yaml" | "xml",
+            "target":    "env:…" | "stdin" | "file:…" | (any),
+            "append":    (boolean),
+            "separator": (string)
+          },
+          "update":      (boolean) # allow change after start
         }
       },
 
@@ -139,9 +144,11 @@ Its schema is shown in the following:
           "description": (string),
           "type":        (string), # JSON or proto3 type
           "proto":       (string), # custom proto3 type def
-          "map_from":    "stdout" | "file:…" | (any),
-          "streamable":  (boolean),
-          "chunk_delim": (string)  # complete chunks only
+          "map_from": {
+            "format":    "json" | "yaml" | "xml",
+            "source":    "stdout" | "file:…" | (any),
+            "separator": (string)
+          }
         }
       },
 
