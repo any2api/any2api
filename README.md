@@ -13,6 +13,12 @@ API bricks are generic, reusable and configurable.
 They implement best practices how certain kinds of APIs are built, for example, how to implement long-running tasks with REST or how to emulate a synchronous invocation with a messaging API.
 This helps to avoid common and reoccurring issues that happen a lot when developing APIs from scratch.
 
+APIs are key for many kinds of applications, for example, microservices.
+They follow the principle of *smart endpoints (APIs) and dumb pipes*.
+However, implementing these smart endpoints isn't trivial.
+Furthermore, a microservice can have multiple endpoints such as a messaging API for internal communication and a REST API as external interface.
+any2api simplifies the creation of smart endpoints by composing API bricks instead of starting from scratch for each endpoint of each microservice.
+
 
 
 ## This repo: any2api core & CLI
