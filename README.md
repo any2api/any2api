@@ -15,7 +15,7 @@ This helps to avoid common and reoccurring issues that happen a lot when develop
 
 APIs are key for many kinds of applications, for example, microservices.
 They follow the principle of *smart endpoints (APIs) and dumb pipes*.
-However, implementing these smart endpoints isn't trivial.
+However, implementing these smart endpoints isn't trivial because they are smart, doing transformation, monitoring, request rate limiting, authentication and more.
 Furthermore, a microservice can have multiple endpoints such as a messaging API for internal communication and a REST API as external interface.
 any2api simplifies the creation of smart endpoints by composing API bricks instead of starting from scratch for each endpoint of each microservice.
 
