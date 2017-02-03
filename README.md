@@ -1,7 +1,7 @@
 # any2api: the better way to create awesome APIs 🚀
 
 **any2api** aims to establish an open ecosystem of composable *API bricks* such as reusable wrappers and adapters.
-Instead of using basic API development frameworks to build specific kinds of APIs from scratch (e.g. REST or messaging APIs), the API bricks simplify the process of creating diverse APIs.
+Instead of using basic API development frameworks to build specific kinds of APIs from scratch (e.g. REST or messaging APIs), these API bricks simplify the process of creating diverse APIs.
 For example, a Python wrapper is used to bring a simple *.py* script into the ecosystem.
 Then, a specific adapter such as a REST adapter is utilized to expose the script's functionality through an API.
 Intermediate adapters can optionally add more functionality to the provided API such as authentication.
