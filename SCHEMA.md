@@ -37,8 +37,12 @@ Its schema is shown in the following:
 
 ``` plaintext
 {
-  "title":       (string),
-  "description": (string),
+  "title":         (string),
+  "description":   (string),
+
+  "packages": {
+    (packageName): (string) # override name
+  },
 
   "messages": {
     (messageName): {
