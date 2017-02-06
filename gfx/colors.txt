@@ -5,4 +5,4 @@ https://material.io/guidelines/style/color.html#color-color-palette
 Indigo 900 #1A237E
 White      #FFFFFF
 
-Export pptx as png 2048x2048
+Export pptx as png
