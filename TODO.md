@@ -2,6 +2,8 @@
 
 * Naming: 'intermediary' instead of 'intermediate-adapter'?
 
+* Feature: adapters and apps read (auto-generated or user-provided) optional security token from ENV to encrypt gRPC connections
+
 * Feature: support adapters that consume multiple gRPC endpoints, e.g. to consolidate their interfaces
 
 * Refine README.md
